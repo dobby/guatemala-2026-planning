@@ -1,0 +1,1106 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guatemala 2026 Reisplanning</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.8.3/css/lightgallery-bundle.min.css">
+  <style>
+    :root {
+      --ink: #17211b;
+      --muted: #657067;
+      --paper: #fbfaf5;
+      --panel: #ffffff;
+      --line: #dde3da;
+      --accent: #0d7c66;
+      --accent-dark: #095947;
+      --amber: #d58a23;
+      --blue: #2f6f96;
+      --soft: #eef5ef;
+      --shadow: 0 18px 45px rgba(19, 34, 25, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.48;
+    }
+
+    a {
+      color: var(--accent-dark);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .hero {
+      min-height: 82vh;
+      display: grid;
+      align-items: end;
+      position: relative;
+      color: #fff;
+      background:
+        linear-gradient(180deg, rgba(7, 18, 14, 0.1), rgba(7, 18, 14, 0.78)),
+        url("assets/reisjunk/reisjunk-acatenango.jpg") center 42% / cover;
+    }
+
+    .hero-inner {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 96px 0 72px;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      font-size: 0.78rem;
+      font-weight: 760;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    h1 {
+      max-width: 850px;
+      margin: 0;
+      font-size: 6.2rem;
+      line-height: 0.94;
+      letter-spacing: 0;
+    }
+
+    .hero-copy {
+      max-width: 790px;
+      margin: 24px 0 0;
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .pill {
+      border: 1px solid rgba(255, 255, 255, 0.36);
+      background: rgba(255, 255, 255, 0.13);
+      color: #fff;
+      border-radius: 999px;
+      padding: 9px 13px;
+      font-size: 0.88rem;
+      backdrop-filter: blur(7px);
+    }
+
+    main {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 38px 0 72px;
+    }
+
+    section {
+      margin-top: 48px;
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      font-size: 2.7rem;
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      font-size: 1.04rem;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 780px;
+      color: var(--muted);
+      font-size: 1.06rem;
+      margin: 0 0 22px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stat {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: 0 8px 24px rgba(19, 34, 25, 0.05);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 2.1rem;
+      line-height: 1;
+      color: var(--accent-dark);
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .route-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .map-shell {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      min-height: 520px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: linear-gradient(145deg, #f8fbf6, #e9f0e8);
+      isolation: isolate;
+    }
+
+    .route-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .map-note {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      z-index: 2;
+      margin: 0;
+      padding: 10px 12px;
+      border-radius: 8px;
+      color: #fff;
+      background: rgba(10, 24, 19, 0.72);
+      font-size: 0.84rem;
+    }
+
+    .route-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .stop {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 12px;
+      align-items: start;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .stop .num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 760;
+      font-size: 0.9rem;
+    }
+
+    .stop p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .table-scroll {
+      overflow-x: auto;
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(19, 34, 25, 0.05);
+    }
+
+    table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 0.94rem;
+    }
+
+    th {
+      background: #f0f4ee;
+      color: #26332a;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .status-booked {
+      color: var(--accent-dark);
+      font-weight: 760;
+    }
+
+    .status-open {
+      color: var(--amber);
+      font-weight: 760;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .photo {
+      position: relative;
+      min-height: 250px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #dfe8d7;
+      box-shadow: 0 10px 26px rgba(19, 34, 25, 0.08);
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+      object-fit: cover;
+    }
+
+    .photo span {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.48);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .booking-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stay-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 8px 24px rgba(19, 34, 25, 0.05);
+    }
+
+    .stay-card h3 {
+      margin-bottom: 4px;
+    }
+
+    .stay-card .meta {
+      margin: 0 0 11px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .link-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .candidate-link,
+    .search-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 9px 10px;
+      background: #f7faf5;
+      color: var(--accent-dark);
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .search-link {
+      justify-content: center;
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .candidate-type {
+      flex: 0 0 auto;
+      border-radius: 999px;
+      padding: 3px 7px;
+      background: #e7efe7;
+      color: #314438;
+      font-size: 0.72rem;
+      font-weight: 760;
+    }
+
+    .stay-card .dates {
+      display: inline-flex;
+      margin: 0 0 10px;
+      border-radius: 999px;
+      padding: 5px 9px;
+      background: var(--soft);
+      color: var(--accent-dark);
+      font-size: 0.78rem;
+      font-weight: 760;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .day {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(19, 34, 25, 0.05);
+      scroll-margin-top: 16px;
+    }
+
+    .day-photo {
+      position: relative;
+      height: 220px;
+      background: #dfe8d7;
+    }
+
+    .day-photo button {
+      border: 0;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: none;
+      cursor: pointer;
+      display: block;
+      position: relative;
+    }
+
+    .day-photo img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .day-photo button:hover img {
+      transform: scale(1.03);
+    }
+
+    .day-photo button[aria-disabled="true"] {
+      cursor: default;
+    }
+
+    .day-photo button[aria-disabled="true"]:hover img {
+      transform: none;
+    }
+
+    .day-photo img {
+      transition: transform 0.35s ease;
+    }
+
+    .gallery-hint {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.55);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 760;
+    }
+
+    .lg-backdrop,
+    .lg-outer {
+      z-index: 9999;
+    }
+
+    .lg-sub-html h4 {
+      margin: 0 0 4px;
+      font-size: 1rem;
+      color: #fff;
+    }
+
+    .lg-sub-html p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .day-body {
+      padding: 17px;
+    }
+
+    .day header {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+
+    .day .date {
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .load {
+      align-self: start;
+      border-radius: 999px;
+      padding: 5px 9px;
+      color: #163025;
+      background: var(--soft);
+      font-size: 0.78rem;
+      font-weight: 760;
+      white-space: nowrap;
+    }
+
+    .day p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    details {
+      margin-top: 12px;
+      border-top: 1px solid var(--line);
+      padding-top: 11px;
+    }
+
+    summary {
+      cursor: pointer;
+      color: var(--accent-dark);
+      font-weight: 760;
+      font-size: 0.92rem;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 11px;
+    }
+
+    .detail-grid div {
+      padding: 10px;
+      border-radius: 8px;
+      background: #f6f8f3;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .detail-grid strong {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--ink);
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .action {
+      background: var(--panel);
+      border-left: 5px solid var(--accent);
+      border-radius: 8px;
+      padding: 14px 16px;
+      box-shadow: 0 8px 24px rgba(19, 34, 25, 0.05);
+    }
+
+    .action p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    footer {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 28px 0 50px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    @media (max-width: 900px) {
+      h1 {
+        font-size: 4.1rem;
+      }
+
+      h2 {
+        font-size: 2.25rem;
+      }
+
+      .stats,
+      .route-grid,
+      .photo-grid,
+      .timeline,
+      .actions {
+        grid-template-columns: 1fr;
+      }
+
+      .map-shell {
+        min-height: 420px;
+      }
+
+      .booking-links {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+    .hero {
+        min-height: 700px;
+      }
+
+      .hero-inner {
+        padding: 40px 18px;
+      }
+
+      h1 {
+        font-size: 3.15rem;
+        line-height: 0.98;
+      }
+
+      h2 {
+        font-size: 1.9rem;
+      }
+
+      .hero-copy,
+      .lead {
+        font-size: 1rem;
+      }
+
+      main,
+      footer {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .pill {
+        width: 100%;
+      }
+
+      .day header {
+        grid-template-columns: 1fr;
+      }
+
+      .route-pin {
+        max-width: 42px;
+        padding-right: 6px;
+      }
+
+      .route-pin .label {
+        display: none;
+      }
+
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      .hero {
+        min-height: auto;
+        color: var(--ink);
+        background: none;
+      }
+
+      .hero-inner {
+        padding: 30px 0;
+      }
+
+      .hero-copy,
+      .pill {
+        color: var(--ink);
+      }
+
+      .map-shell {
+        min-height: 360px;
+        box-shadow: none;
+      }
+
+      .day,
+      .stat,
+      table {
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Familieplanning · 23 juli - 10 augustus 2026</p>
+      <h1>Guatemala 2026</h1>
+      <p class="hero-copy">Antigua, Acatenango, Lake Atitlan, Semuc Champey, Tikal en Rio Dulce in een route die avontuur combineert met expliciete herstelblokken.</p>
+      <div class="hero-meta">
+        <span class="pill">17 nachten ter plaatse</span>
+        <span class="pill">4 reizigers</span>
+        <span class="pill">1 hotel geboekt</span>
+        <span class="pill">Private car Rio Dulce naar L'Aurora Inn</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section aria-labelledby="summary-title">
+      <h2 id="summary-title">Route In Een Oogopslag</h2>
+      <p class="lead">De route is vastgezet als werkvariant. Hotels die nog niet vastliggen blijven bewust als “nog te boeken” in deze one-pager; alleen L'Aurora Inn staat als bevestigd hotel vermeld.</p>
+      <div class="stats">
+        <div class="stat"><strong>17</strong><span>nachten in Guatemala</span></div>
+        <div class="stat"><strong>8</strong><span>slaapblokken inclusief Acatenango</span></div>
+        <div class="stat"><strong>6</strong><span>open accommodatieblokken</span></div>
+        <div class="stat"><strong>1</strong><span>bevestigd hotel: L'Aurora Inn</span></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="map-title">
+      <h2 id="map-title">Kaart En Route</h2>
+      <div class="route-grid">
+        <div class="map-shell" aria-label="Routekaart Guatemala 2026">
+          <svg class="route-svg" viewBox="0 0 900 900" role="img" aria-labelledby="guatemala-map-title guatemala-map-desc">
+            <title id="guatemala-map-title">Statische routekaart Guatemala 2026</title>
+            <desc id="guatemala-map-desc">Route van Guatemala City naar Antigua, Acatenango, Lake Atitlan, Semuc Champey, Flores, Tikal, Rio Dulce en terug naar L'Aurora Inn.</desc>
+            <defs>
+              <filter id="map-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0c251c" flood-opacity="0.12"/>
+              </filter>
+            </defs>
+            <rect width="900" height="900" fill="#f7faf5"/>
+            <path d="M285 76 L682 72 L700 248 L650 340 L698 442 L670 548 L736 626 L646 720 L494 812 L338 804 L188 718 L112 596 L168 464 L114 356 L178 260 L288 208 Z" fill="#dbe7db" stroke="#b9c8b6" stroke-width="2" filter="url(#map-shadow)"/>
+            <path d="M690 462 C750 464 800 494 826 542 C782 562 730 566 682 544 Z" fill="#dbe7db" stroke="#b9c8b6" stroke-width="2"/>
+            <path d="M488 656 C438 630 380 612 330 578 C280 544 240 502 208 456" fill="none" stroke="#b8cbb9" stroke-width="34" stroke-linecap="round" opacity="0.35"/>
+            <path d="M488 656 C438 630 380 612 330 578 C280 544 240 502 208 456" fill="none" stroke="#fff" stroke-width="20" stroke-linecap="round" opacity="0.9"/>
+            <path d="M488 656 L405 716 L292 690 L246 595 L208 456 L258 355 L420 312 L570 270 L638 202 L664 160 M570 270 L646 360 L704 478 L704 548 L642 630 L488 656" fill="none" stroke="#ffffff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M488 656 L405 716 L292 690 L246 595 L208 456 L258 355 L420 312 L570 270 L638 202 L664 160 M570 270 L646 360 L704 478 L704 548 L642 630 L488 656" fill="none" stroke="#0d7c66" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <g font-family="Inter, Arial, sans-serif" font-weight="760" fill="#17211b">
+              <g transform="translate(488 656)"><circle r="12" fill="#0d7c66"/><text x="18" y="6" font-size="22">Guatemala City / L'Aurora</text></g>
+              <g transform="translate(405 716)"><circle r="12" fill="#0d7c66"/><text x="18" y="7" font-size="22">Antigua</text></g>
+              <g transform="translate(370 764)"><circle r="11" fill="#d58a23"/><text x="18" y="7" font-size="20">Acatenango</text></g>
+              <g transform="translate(208 456)"><circle r="12" fill="#0d7c66"/><text x="-148" y="8" font-size="22">Lake Atitlan</text></g>
+              <g transform="translate(420 312)"><circle r="12" fill="#0d7c66"/><text x="-170" y="7" font-size="22">Semuc Champey</text></g>
+              <g transform="translate(570 270)"><circle r="12" fill="#0d7c66"/><text x="18" y="7" font-size="22">Flores / El Remate</text></g>
+              <g transform="translate(664 160)"><circle r="12" fill="#0d7c66"/><text x="-8" y="-26" font-size="24">Tikal</text></g>
+              <g transform="translate(704 478)"><circle r="12" fill="#0d7c66"/><text x="18" y="7" font-size="22">Rio Dulce</text></g>
+            </g>
+            <g fill="#657067" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700">
+              <text x="34" y="846">Schematische statische kaart, route niet op schaal.</text>
+            </g>
+          </svg>
+          <p class="map-note">Statische vectorkaart zonder externe maptiles. Google Static Map kan later als er een Maps API key beschikbaar is.</p>
+        </div>
+        <div class="route-list">
+          <a class="stop" href="#day-1"><span class="num">1</span><span><strong>GUA naar Antigua</strong><p>Aankomst 20:30, late transfer naar Antigua.</p></span></a>
+          <a class="stop" href="#day-4"><span class="num">2</span><span><strong>Acatenango</strong><p>Overnight hike met optionele Fuego push als het veilig is.</p></span></a>
+          <a class="stop" href="#day-6"><span class="num">3</span><span><strong>Lake Atitlan</strong><p>Hoofdblok voor decompressie na de vulkaan.</p></span></a>
+          <a class="stop" href="#day-9"><span class="num">4</span><span><strong>Lanquin / Semuc</strong><p>Drie nachten zodat Semuc de omweg waard is.</p></span></a>
+          <a class="stop" href="#day-12"><span class="num">5</span><span><strong>El Remate / Flores / Tikal</strong><p>Tikal plus rust aan Lago Peten Itza.</p></span></a>
+          <a class="stop" href="#day-15"><span class="num">6</span><span><strong>Rio Dulce</strong><p>Water/jungle-afsluiter zonder tempels.</p></span></a>
+          <a class="stop" href="#day-17"><span class="num">7</span><span><strong>L'Aurora Inn</strong><p>Laatste airportnacht, geboekt.</p></span></a>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="photos-title">
+      <h2 id="photos-title">Sfeerbeelden</h2>
+      <div class="photo-grid">
+        <div class="photo"><img src="assets/reisjunk/reisjunk-antigua-arco-santa-catalina.jpg" alt="Antigua met Arco de Santa Catalina"><span>Antigua</span></div>
+        <div class="photo"><img src="assets/reisjunk/reisjunk-lake-atitlan-sunset.jpg" alt="Zonsondergang aan Lake Atitlan"><span>Lake Atitlan</span></div>
+        <div class="photo"><img src="assets/reisjunk/reisjunk-semuc-champey.jpg" alt="Semuc Champey natuurlijke baden"><span>Semuc Champey</span></div>
+        <div class="photo"><img src="assets/reisjunk/reisjunk-tikal.jpg" alt="Tikal tempels in Guatemala"><span>Tikal</span></div>
+        <div class="photo"><img src="assets/wikimedia/rio-dulce-bbclcd.jpg" alt="Rio Dulce richting Caribische Zee"><span>Rio Dulce</span></div>
+        <div class="photo"><img src="assets/reisjunk/reisjunk-acatenango.jpg" alt="Acatenango vulkaan"><span>Acatenango</span></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="booking-title">
+      <h2 id="booking-title">Booking Status</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Blok</th>
+              <th>Datums</th>
+              <th>Nachten</th>
+              <th>Status</th>
+              <th>Notitie</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Antigua start</td><td>23-26 jul</td><td>3</td><td class="status-open">Nog te boeken</td><td>Late check-in en GUA-transfer nodig.</td></tr>
+            <tr><td>Acatenango basecamp</td><td>26-27 jul</td><td>1</td><td class="status-open">Via tour</td><td>Tour moet slaap, eten, gear en pickup/dropoff afdekken.</td></tr>
+            <tr><td>Antigua recovery</td><td>27-28 jul</td><td>1</td><td class="status-open">Nog te boeken</td><td>Bij voorkeur zelfde hotel als eerste Antigua-blok.</td></tr>
+            <tr><td>Lake Atitlan</td><td>28-31 jul</td><td>3</td><td class="status-open">Nog te boeken</td><td>Main recovery block.</td></tr>
+            <tr><td>Lanquin / Semuc</td><td>31 jul-3 aug</td><td>3</td><td class="status-open">Nog te boeken</td><td>Toegang tot Semuc zonder extra frictie.</td></tr>
+            <tr><td>El Remate / Flores</td><td>3-6 aug</td><td>3</td><td class="status-open">Nog te boeken</td><td>Comfortkandidaat na Semuc.</td></tr>
+            <tr><td>Rio Dulce</td><td>6-8 aug</td><td>2</td><td class="status-open">Nog te boeken</td><td>River/jungle lodge als ervaring.</td></tr>
+            <tr><td>L'Aurora Inn</td><td>8-9 aug</td><td>1</td><td class="status-booked">Geboekt</td><td>2 kamers, EUR 131, free cancellation; vroege shuttle bevestigen.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="stay-links-title">
+      <h2 id="stay-links-title">Slaapvoorstellen</h2>
+      <p class="lead">Eerste Booking.com-shortlist per open verblijfblok. Dit zijn nog geen keuzes; prijzen en beschikbaarheid opnieuw controleren voor boeken.</p>
+      <div class="booking-links" id="booking-links"></div>
+    </section>
+
+    <section aria-labelledby="days-title">
+      <h2 id="days-title">Dagplanning</h2>
+      <div class="timeline" id="timeline"></div>
+    </section>
+
+    <section aria-labelledby="actions-title">
+      <h2 id="actions-title">Open Acties</h2>
+      <div class="actions">
+        <div class="action"><h3>Boek open verblijven</h3><p>Antigua, Lake Atitlan, Semuc, El Remate/Flores en Rio Dulce blijven open.</p></div>
+        <div class="action"><h3>Kies Acatenango-operator</h3><p>Pickup, gear, eten, basecamp, Fuego-policy en weather cancellation moeten helder zijn.</p></div>
+        <div class="action"><h3>Leg lange transfers vast</h3><p>Vooral Atitlan naar Semuc, Semuc naar Peten en Rio Dulce naar L'Aurora Inn.</p></div>
+        <div class="action"><h3>Bevestig L'Aurora shuttle</h3><p>Direct met de property afstemmen voor de 06:15 vlucht op 9 augustus.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Images: Reisjunk source images captured for private planning; Rio Dulce image by BBCLCD via Wikimedia Commons, CC BY-SA 4.0. Booking details are redacted and only confirmed L'Aurora Inn is shown as a fixed hotel. Booking links are exploratory and should be rechecked before reserving.
+  </footer>
+
+  <div id="lightgallery-host" hidden></div>
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.8.3/lightgallery.umd.min.js"></script>
+  <script>
+    const img = {
+      antigua: "assets/reisjunk/reisjunk-antigua-arco-santa-catalina.jpg",
+      acatenango: "assets/reisjunk/reisjunk-acatenango.jpg",
+      atitlan: "assets/reisjunk/reisjunk-lake-atitlan-sunset.jpg",
+      semuc: "assets/reisjunk/reisjunk-semuc-champey.jpg",
+      tikal: "assets/reisjunk/reisjunk-tikal.jpg",
+      rio: "assets/wikimedia/rio-dulce-bbclcd.jpg",
+      map: "assets/reisjunk/reisjunk-route-map-guatemala.jpg",
+      antiguaStreet: "assets/wikimedia-gallery/antigua-calle-arco-santa-catalina.jpg",
+      acatenangoWide: "assets/wikimedia-gallery/acatenango-fuego-volcanoes.jpg",
+      fuegoAsh: "assets/wikimedia-gallery/fuego-from-acatenango.jpg",
+      atitlanWide: "assets/wikimedia-gallery/lake-atitlan-panorama.jpg",
+      atitlanMorning: "assets/wikimedia-gallery/lake-atitlan-morning.jpg",
+      semucPools: "assets/wikimedia-gallery/semuc-champey-pools.jpg",
+      semucWide: "assets/wikimedia-gallery/semuc-champey-wide.jpg",
+      tikalTemple: "assets/wikimedia-gallery/tikal-temple.jpg",
+      rioIzabal: "assets/wikimedia-gallery/rio-dulce-izabal.jpg",
+      rioBridge: "assets/wikimedia-gallery/rio-dulce-bridge.jpg"
+      ,
+      rpAntigua: "assets/reisplaatje-gallery/antigua-main.jpg",
+      rpAcatenango: "assets/reisplaatje-gallery/acatenango-main.jpg",
+      rpAcatenangoBasecamp: "assets/reisplaatje-gallery/acatenango-basecamp.jpg",
+      rpAtitlan: "assets/reisplaatje-gallery/lake-atitlan-main.jpg",
+      rpAtitlanBoat: "assets/reisplaatje-gallery/lake-atitlan-boat.jpg",
+      rpSemuc: "assets/reisplaatje-gallery/semuc-main.jpg",
+      rpSemucPools: "assets/reisplaatje-gallery/semuc-pools.jpg",
+      rpTikal: "assets/reisplaatje-gallery/tikal-main.jpg",
+      rpTikalJungle: "assets/reisplaatje-gallery/tikal-jungle.jpg"
+    };
+
+    const stays = [
+      {
+        title: "Antigua start",
+        dates: "23-26 jul · 3 nachten · 4 volwassenen / 2 kamers",
+        meta: "Aankomstblok · late check-in + transfer belangrijk",
+        note: "Filter: beschikbaarheid voor 2026-07-23 t/m 2026-07-26. Prioriteit is betrouwbare aankomst, rustige ligging en praktische kamers.",
+        search: "https://www.booking.com/searchresults.html?ss=Antigua%20Guatemala&checkin=2026-07-23&checkout=2026-07-26&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR&order=review_score_and_price",
+        links: [
+          ["The Purpose Hostel", "https://www.booking.com/hotel/gt/the-purpose-hostel.html?checkin=2026-07-23&checkout=2026-07-26&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "budget"],
+          ["Poetry House", "https://www.booking.com/hotel/gt/poetry-house-antigua-guatemala.html?checkin=2026-07-23&checkout=2026-07-26&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "unique stay"],
+          ["Villa San Lazaro", "https://www.booking.com/hotel/gt/beautiful-8-person-villa-in-antigua-with-parking-antigua-guatemala.html?checkin=2026-07-23&checkout=2026-07-26&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "family villa"],
+          ["Chez Daniel", "https://www.booking.com/hotel/gt/chez-daniel.html?checkin=2026-07-23&checkout=2026-07-26&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "comfort"],
+          ["Casa Santa Margarita", "https://www.booking.com/hotel/gt/casa-santa-margarita-antigua-guatemala.html?checkin=2026-07-23&checkout=2026-07-26&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "comfort"]
+        ]
+      },
+      {
+        title: "Antigua recovery",
+        dates: "27-28 jul · 1 nacht · 4 volwassenen / 2 kamers",
+        meta: "Recoveryblok · douche, laundry, slaap",
+        note: "Filter: beschikbaarheid voor 2026-07-27 t/m 2026-07-28. Default blijft: zelfde hotel als eerste Antigua-blok als dat praktisch kan.",
+        search: "https://www.booking.com/searchresults.html?ss=Antigua%20Guatemala&checkin=2026-07-27&checkout=2026-07-28&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR&order=review_score_and_price",
+        links: [
+          ["El Rinconcito", "https://www.booking.com/hotel/gt/el-rinconcito-de-la-antigua.html?checkin=2026-07-27&checkout=2026-07-28&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "budget"],
+          ["Central Loft", "https://www.booking.com/hotel/gt/boutique-loft-with-terrace-and-volcano-view-in-antigua.html?checkin=2026-07-27&checkout=2026-07-28&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "unique stay"],
+          ["Los Arcos la Ermita", "https://www.booking.com/hotel/gt/casa-colonial-antigua-guatemala1.html?checkin=2026-07-27&checkout=2026-07-28&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "comfort"],
+          ["Villa San Lazaro", "https://www.booking.com/hotel/gt/beautiful-8-person-villa-in-antigua-with-parking-antigua-guatemala.html?checkin=2026-07-27&checkout=2026-07-28&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "family villa"]
+        ]
+      },
+      {
+        title: "Lake Atitlan",
+        dates: "28-31 jul · 3 nachten · 4 volwassenen / 2 kamers",
+        meta: "Meer/recoveryblok · hier mag comfort tellen",
+        note: "Filter: beschikbaarheid voor 2026-07-28 t/m 2026-07-31. Booking-hitkwaliteit blijft zwakker; vergelijk ook met Casa del Mundo, Atitlan Sunset Lodge, La Iguana Perdida en El Picnic.",
+        search: "https://www.booking.com/searchresults.html?ss=Lake%20Atitlan%20Guatemala&checkin=2026-07-28&checkout=2026-07-31&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR&order=review_score_and_price",
+        links: [
+          ["Patziapa", "https://www.booking.com/hotel/gt/patziapa.html?checkin=2026-07-28&checkout=2026-07-31&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "budget"],
+          ["Amanecer magico", "https://www.booking.com/hotel/gt/amanecer-magico-con-la-mejor-vista-al-lago.html?checkin=2026-07-28&checkout=2026-07-31&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "view stay"],
+          ["Home Garden", "https://www.booking.com/hotel/gt/home-garden.html?checkin=2026-07-28&checkout=2026-07-31&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "comfort"],
+          ["Apartamento Santa Elena", "https://www.booking.com/hotel/gt/apartamento-casa-santa-elena-panajachel.html?checkin=2026-07-28&checkout=2026-07-31&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "apartment"]
+        ]
+      },
+      {
+        title: "Lanquin / Semuc",
+        dates: "31 jul-3 aug · 3 nachten · 4 volwassenen / 2 kamers",
+        meta: "Jungle/Semucblok · character boven luxe",
+        note: "Filter: beschikbaarheid voor 2026-07-31 t/m 2026-08-03. Kies vooral iets dat Semuc-logistiek vereenvoudigt en onnodige frictie vermijdt.",
+        search: "https://www.booking.com/searchresults.html?ss=Lanquin%20Guatemala&checkin=2026-07-31&checkout=2026-08-03&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR&order=review_score_and_price",
+        links: [
+          ["Casa MARY", "https://www.booking.com/hotel/gt/casa-maria-elvira.html?checkin=2026-07-31&checkout=2026-08-03&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "budget"],
+          ["Ch'i Bocol", "https://www.booking.com/hotel/gt/ch-39-i-bocol-community-hostel.html?checkin=2026-07-31&checkout=2026-08-03&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "community stay"],
+          ["Yaxlik River Lodge", "https://www.booking.com/hotel/gt/yaxlik-river-lodge.html?checkin=2026-07-31&checkout=2026-08-03&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "river lodge"],
+          ["Utopia Eco Hotel", "https://www.booking.com/hotel/gt/utopia-eco.html?checkin=2026-07-31&checkout=2026-08-03&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "eco lodge"],
+          ["El Portal De Champey", "https://www.booking.com/hotel/gt/el-portal-de-champey.html?checkin=2026-07-31&checkout=2026-08-03&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "unique stay"]
+        ]
+      },
+      {
+        title: "El Remate / Flores",
+        dates: "3-6 aug · 3 nachten · 4 volwassenen / 2 kamers",
+        meta: "Tikal + meerblok · sterke comfortkandidaat",
+        note: "Filter: beschikbaarheid voor 2026-08-03 t/m 2026-08-06. Dit is de beste plek om na Semuc bewust comfort of luxe te kiezen.",
+        search: "https://www.booking.com/searchresults.html?ss=El%20Remate%20Guatemala&checkin=2026-08-03&checkout=2026-08-06&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR&order=review_score_and_price",
+        links: [
+          ["Alice Guesthouse", "https://www.booking.com/hotel/gt/alice-guesthouse.html?checkin=2026-08-03&checkout=2026-08-06&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "budget"],
+          ["Casa Cahui", "https://www.booking.com/hotel/gt/casa-cahui.html?checkin=2026-08-03&checkout=2026-08-06&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "lake stay"],
+          ["Posada del Cerro", "https://www.booking.com/hotel/gt/posada-del-cerro.html?checkin=2026-08-03&checkout=2026-08-06&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "nature lodge"],
+          ["Hotel Gringo Perdido", "https://www.booking.com/hotel/gt/gringo-perdido.html?checkin=2026-08-03&checkout=2026-08-06&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "luxe lodge"],
+          ["La Lancha", "https://www.booking.com/hotel/gt/la-lancha.html?checkin=2026-08-03&checkout=2026-08-06&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "luxury"]
+        ]
+      },
+      {
+        title: "Rio Dulce",
+        dates: "6-8 aug · 2 nachten · 4 volwassenen / 2 kamers",
+        meta: "River/jungleblok · verblijf als ervaring",
+        note: "Filter: beschikbaarheid voor 2026-08-06 t/m 2026-08-08. De lodge zelf moet de waterdag dragen; dit is de laatste niet-tempel decompression.",
+        search: "https://www.booking.com/searchresults.html?ss=Rio%20Dulce%20Guatemala&checkin=2026-08-06&checkout=2026-08-08&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR&order=review_score_and_price",
+        links: [
+          ["Hotel Casa Perico", "https://www.booking.com/hotel/gt/casa-perico.html?checkin=2026-08-06&checkout=2026-08-08&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "budget lodge"],
+          ["El Hotelito Perdido", "https://www.booking.com/hotel/gt/el-hotelito-perdido.html?checkin=2026-08-06&checkout=2026-08-08&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "jungle lodge"],
+          ["Tortugal", "https://www.booking.com/hotel/gt/tortugal.html?checkin=2026-08-06&checkout=2026-08-08&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "boutique lodge"],
+          ["Boatique", "https://www.booking.com/hotel/gt/boatique-and-marina.html?checkin=2026-08-06&checkout=2026-08-08&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "marina lodge"],
+          ["Linda Vista", "https://www.booking.com/hotel/gt/linda-vista-rio-dulce.html?checkin=2026-08-06&checkout=2026-08-08&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR", "comfort view"]
+        ]
+      }
+    ];
+
+    const days = [
+      ["day-1", "Dag 1 · Antigua", "do 23 jul", "Reis", img.rpAntigua, "Aankomst GUA 20:30 en direct met vooraf geboekte late transfer naar Antigua. Geen avondprogramma.", "BRU 12:00 -> IAD 14:20; IAD 17:52 -> GUA 20:30; prebooked late transfer naar Antigua.", "Late check-in hotel + GUA -> Antigua transfer boeken.", "Als de vlucht vertraagt, moet de transfer nog steeds betrouwbaar zijn.", "antigua", "hero"],
+      ["day-2", "Dag 2 · Antigua", "vr 24 jul", "Laag", img.rpAntigua, "Rustig landen: ontbijt, centrale wandeling, Arco de Santa Catalina, food/markt zonder checklist.", "Te voet of tuk-tuk lokaal.", "Acatenango gear list en pickup details checken.", "Cafe/indoor rust als jetlag of regen toeslaat.", "antigua", "hero"],
+      ["day-3", "Dag 3 · Antigua", "za 25 jul", "Laag-medium", img.rpAntigua, "Antigua verder verkennen, eventueel koffie/chocolade, gear check voor Acatenango en vroeg slapen.", "Lokaal, geen lange verplaatsing.", "Finale tourconfirmatie voor Acatenango/Fuego.", "Maak dit een rust-en-prepdag als iemand nog moe is.", "antigua", "hero"],
+      ["day-4", "Dag 4 · Acatenango", "zo 26 jul", "Hoog", img.rpAcatenango, "Start 2-daagse Acatenango/Fuego hike. Basecampnacht via tour; Fuego alleen als veilig en haalbaar.", "Tour pickup uit Antigua.", "Tour moet lodging, meals, gear, pickup/dropoff en weather policy bevatten.", "Gids/weather beslissing volgen; safety boven summit/Fuego ambitie.", "acatenango", "hero"],
+      ["day-5", "Dag 5 · Antigua recovery", "ma 27 jul", "Hoog -> laag", img.rpAcatenangoBasecamp, "Sunrise/afdaling, terug naar Antigua, douche, goed eten, laundry en herstel. Geen extra plan.", "Terug met tour naar Antigua.", "Recoverynacht liefst zelfde hotel of nabij.", "Als de hike nat/zwaar was, wordt dit pure recovery.", "antigua", "hero"],
+      ["day-6", "Dag 6 · Lake Atitlan", "di 28 jul", "Medium", img.rpAtitlan, "Transfer Antigua naar Lake Atitlan. Check-in en rustig lakeside landen.", "Antigua -> Atitlan shuttle/private transfer.", "Atitlan base kiezen en transfer boeken.", "Als transfer lang duurt: geen activiteit forceren.", "atitlan", "hero"],
+      ["day-7", "Dag 7 · Lake Atitlan", "wo 29 jul", "Laag-medium", img.rpAtitlanBoat, "Bootdorpjes, zwemmen/kajak, San Juan of San Marcos, sunset. Ochtend benutten voor beter weer.", "Boot tussen dorpen als het weer goed zit.", "Check of lodge helpt met boten en onward transfer.", "Bij slecht meerweer: dicht bij lodge/base town blijven.", "atitlan", "hero"],
+      ["day-8", "Dag 8 · Lake Atitlan", "do 30 jul", "Laag-medium", img.rpAtitlan, "Vrije recoverydag: korte wandeling, cafe, yoga, kayak of niets. Dit blok moet decompressie blijven.", "Lokaal per boot/wandelen.", "Transfer naar Lanquin/Semuc bevestigen.", "Geen activiteiten pushen; rust bewaren voor Semuc-transfer.", "atitlan", "hero"],
+      ["day-9", "Dag 9 · Lanquin / Semuc", "vr 31 jul", "Hoge reisdag", img.rpSemuc, "Lange transfer Lake Atitlan naar Lanquin/Semuc. Check-in, simpele avond, geen activiteit.", "Atitlan -> Lanquin/Semuc, vroeg vertrekken.", "Betrouwbare transfer en lodge met lage access-frictie boeken.", "Geen Semuc activiteit op aankomstdag; geen nachttransfer.", "semuc", "hero"],
+      ["day-10", "Dag 10 · Lanquin / Semuc", "za 1 aug", "Laag-medium", img.rpSemuc, "Settle day: lichte rivier/jungle, zwemmen of rust. Semuc hoofdbezoek kan schuiven naar beste weer.", "Lodge transfer/tuk-tuk lokaal.", "Semuc logistiek met lodge regelen.", "Semuc hoofdbezoek schuiven naar beste weer van dag 10 of 11.", "semuc", "hero"],
+      ["day-11", "Dag 11 · Semuc Champey", "zo 2 aug", "Medium-hoog", img.rpSemucPools, "Semuc pools en mirador. Caves alleen als energie en waterstand goed zitten.", "Lokale transfer naar Semuc.", "Transfer naar El Remate/Flores bevestigen.", "Caves overslaan als waterstand/energie niet goed zit.", "semuc", "hero"],
+      ["day-12", "Dag 12 · El Remate / Flores", "ma 3 aug", "Hoge reisdag", img.rpTikal, "Lange transfer Lanquin/Semuc naar El Remate of Flores. Licht meer/Flores alleen als energie over is.", "Lanquin/Semuc -> El Remate/Flores.", "El Remate vs Flores base kiezen; Tikal guide/pickup regelen.", "Pure travel day als de rit zwaar uitvalt.", "tikal", "hero"],
+      ["day-13", "Dag 13 · El Remate / Flores", "di 4 aug", "Laag", img.rpTikalJungle, "Rustdag aan Lago Peten Itza: zwemmen, eten, lichte wandeling. Herstel na de Semuc-transfer.", "Lokaal.", "Tikal early start, guide, breakfast box en pickup bevestigen.", "Lodge/rest day bij regen of vermoeidheid.", "tikal", "hero"],
+      ["day-14", "Dag 14 · Tikal", "wo 5 aug", "Medium-hoog", img.rpTikal, "Tikal vroeg met gids. Namiddag vrij voor rust, meer of eenvoudige maaltijd.", "Vroege transfer naar Tikal met gids.", "Transfer naar Rio Dulce bevestigen.", "Bij slecht weer route in park versimpelen, niet schrappen.", "tikal", "hero"],
+      ["day-15", "Dag 15 · Rio Dulce", "do 6 aug", "Medium", img.rioIzabal, "Transfer El Remate/Flores naar Rio Dulce. Check in bij river/jungle lodge en laat de lodge het doel zijn.", "El Remate/Flores -> Rio Dulce.", "River/jungle lodge met makkelijke waterdag kiezen.", "Als transfer traag is, laat de lodge de activiteit zijn.", "rio", "hero"],
+      ["day-16", "Dag 16 · Rio Dulce", "vr 7 aug", "Laag-medium", img.rioBridge, "Boot/kayak/Livingston/jungle-water day. Geen tempels, geen zware checklist.", "Boot/kayak afhankelijk van lodge en weer.", "Private car Rio Dulce -> L'Aurora Inn bevestigen.", "Dicht bij lodge blijven bij slecht rivierweer.", "rio", "hero"],
+      ["day-17", "Dag 17 · L'Aurora Inn", "za 8 aug", "Reis -> laag", img.rioIzabal, "Private car Rio Dulce naar L'Aurora Inn. Mik op aankomst in de namiddag, inpakken, vroeg eten, vroeg slapen.", "Private car Rio Dulce -> L'Aurora Inn.", "Airport shuttle pickup voor 06:15 vlucht bevestigen.", "Road/weather buffer inbouwen; geen avondplan.", "rio", "hero"],
+      ["day-18", "Dag 18 · Transit", "zo 9 aug", "Reis", img.antigua, "GUA 06:15 naar IAH, ORD en BRU. Alles klaarzetten de avond voordien.", "L'Aurora Inn -> GUA -> IAH -> ORD -> BRU.", "ESTA en bagagebeperkingen ruim vooraf afhandelen.", "Alle documenten en bagage klaar op 8 augustus.", "", ""],
+      ["day-19", "Dag 19 · Thuis", "ma 10 aug", "Aankomst", img.antigua, "Aankomst BRU 09:00. Reis afronden en herstellen.", "Aankomst in Brussel.", "Geen bookingactie.", "Hersteldag voorzien.", "", ""]
+    ];
+
+    const bookingRoot = document.getElementById("booking-links");
+    bookingRoot.innerHTML = stays.map((stay) => `
+      <article class="stay-card">
+        <h3>${stay.title}</h3>
+        <p class="dates">${stay.dates}</p>
+        <p class="meta">${stay.meta}</p>
+        <p>${stay.note}</p>
+        <div class="link-list">
+          <a class="search-link" href="${stay.search}" rel="noreferrer">Open datum-gefilterde Booking search</a>
+          ${stay.links.map(([label, href, type]) => `<a class="candidate-link" href="${href}" rel="noreferrer"><span>${label}</span><span class="candidate-type">${type}</span></a>`).join("")}
+        </div>
+      </article>
+    `).join("");
+
+    const galleryData = {
+      antifall: [
+        { src: img.antigua, caption: "Antigua centrum en koloniale sfeer" },
+        { src: img.acatenango, caption: "Acatenango aan de rand van de route" },
+        { src: img.map, caption: "Route-overzicht Guatemala" }
+      ],
+      antigua: [
+        { src: img.rpAntigua, caption: "Antigua via Reisplaatje" },
+        { src: img.antigua, caption: "Antigua en omgeving" },
+        { src: img.antiguaStreet, caption: "Calle del Arco de Santa Catalina" }
+      ],
+      acatenango: [
+        { src: img.rpAcatenango, caption: "Acatenango via Reisplaatje" },
+        { src: img.rpAcatenangoBasecamp, caption: "Basecamp Acatenango via Reisplaatje" },
+        { src: img.acatenango, caption: "Acatenango en Fuego uitzicht" },
+        { src: img.acatenangoWide, caption: "Fuego en Acatenango panorama" },
+        { src: img.fuegoAsh, caption: "Fuego gezien vanaf Acatenango" }
+      ],
+      atitlan: [
+        { src: img.rpAtitlan, caption: "Lake Atitlan via Reisplaatje" },
+        { src: img.rpAtitlanBoat, caption: "Boot op Lake Atitlan via Reisplaatje" },
+        { src: img.atitlan, caption: "Lake Atitlan vlakbij het water" },
+        { src: img.atitlanWide, caption: "Lake Atitlan panorama" },
+        { src: img.atitlanMorning, caption: "Ochtendlicht boven Lake Atitlan" }
+      ],
+      semuc: [
+        { src: img.rpSemuc, caption: "Semuc Champey via Reisplaatje" },
+        { src: img.rpSemucPools, caption: "Semuc pools via Reisplaatje" },
+        { src: img.semuc, caption: "Semuc Champey omgeving" },
+        { src: img.semucPools, caption: "Turquoise pools van Semuc Champey" }
+      ],
+      tikal: [
+        { src: img.rpTikal, caption: "Tikal via Reisplaatje" },
+        { src: img.rpTikalJungle, caption: "Tikal jungle via Reisplaatje" },
+        { src: img.tikal, caption: "Tikal in de jungle" },
+        { src: img.tikalTemple, caption: "Tempels en jungle in Tikal" }
+      ],
+      rio: [
+        { src: img.rioIzabal, caption: "Rio Dulce bij Lake Izabal" },
+        { src: img.rioBridge, caption: "Puente de Rio Dulce" },
+        { src: img.rio, caption: "Rio Dulce rivier en marina" },
+        { src: img.rioBridge, caption: "Rio Dulce brug" }
+      ]
+    };
+
+    const galleryHost = document.getElementById("lightgallery-host");
+    let activeGallery = null;
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+    }
+
+    function openGallery(dayTitle, photos) {
+      if (!photos?.length || typeof lightGallery !== "function") {
+        return;
+      }
+
+      if (activeGallery?.destroy) {
+        activeGallery.destroy(true);
+      }
+
+      activeGallery = lightGallery(galleryHost, {
+        dynamic: true,
+        download: false,
+        counter: true,
+        closable: true,
+        hideScrollbar: true,
+        dynamicEl: photos.map((photo) => ({
+          src: photo.src,
+          thumb: photo.src,
+          subHtml: `<h4>${escapeHtml(photo.caption)}</h4><p>${escapeHtml(dayTitle)}</p>`
+        }))
+      });
+
+      galleryHost.addEventListener("lgAfterClose", () => {
+        if (activeGallery?.destroy) {
+          activeGallery.destroy(true);
+          activeGallery = null;
+        }
+      }, { once: true });
+
+      activeGallery.openGallery(0);
+    }
+
+    const timelineRoot = document.getElementById("timeline");
+    timelineRoot.innerHTML = days.map(([id, title, date, load, image, summary, transport, action, fallback, galleryKey]) => {
+      const hasGallery = Boolean(galleryData[galleryKey]?.length);
+      const buttonLabel = hasGallery ? `Open sfeerbeelden voor ${title}` : `Geen sfeerbeelden voor ${title}`;
+      const galleryHint = hasGallery ? "Klik voor sfeerbeelden" : "Geen sfeerbeelden";
+      return `
+      <article class="day" id="${id}">
+        <div class="day-photo">
+          <button class="day-photo-btn" type="button" data-gallery="${galleryKey}" data-title="${title}" aria-label="${buttonLabel}" aria-disabled="${hasGallery ? "false" : "true"}">
+            <img src="${image}" alt="${title}">
+            <span class="gallery-hint">${galleryHint}</span>
+          </button>
+        </div>
+        <div class="day-body">
+          <header><div><h3>${title}</h3><div class="date">${date}</div></div><span class="load">${load}</span></header>
+          <p>${summary}</p>
+          <details>
+            <summary>Dagdetail en opties</summary>
+            <div class="detail-grid">
+              <div><strong>Transport</strong>${transport}</div>
+              <div><strong>Booking/actie</strong>${action}</div>
+              <div><strong>Regenseizoen/fallback</strong>${fallback}</div>
+              <div><strong>Ritme</strong>${load}</div>
+            </div>
+          </details>
+        </div>
+      </article>
+      `;
+    }).join("");
+
+    timelineRoot.addEventListener("click", (event) => {
+      const btn = event.target.closest(".day-photo-btn");
+      if (!btn) {
+        return;
+      }
+      const galleryKey = btn.dataset.gallery;
+      if (btn.getAttribute("aria-disabled") === "true") {
+        return;
+      }
+      const dayTitle = btn.dataset.title || "Dagplanning";
+      const photos = galleryData[galleryKey] || [];
+      if (!photos.length) {
+        return;
+      }
+      openGallery(dayTitle, photos);
+    });
+  </script>
+</body>
+</html>
