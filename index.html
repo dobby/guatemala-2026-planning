@@ -170,7 +170,8 @@
       position: relative;
       width: 100%;
       min-width: 0;
-      height: clamp(430px, 48vw, 620px);
+      min-height: 520px;
+      align-self: stretch;
       border: 1px solid var(--line);
       border-radius: 8px;
       overflow: hidden;
@@ -628,6 +629,7 @@
 
       .map-shell {
         height: 420px;
+        min-height: 420px;
       }
 
       .booking-links {
