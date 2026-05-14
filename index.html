@@ -305,7 +305,8 @@
       border-top: 1px solid var(--line);
     }
 
-    .day-story:nth-child(even) .day-media {
+    .day-story:nth-child(even) .day-media,
+    .day-story:nth-child(even) .travel-card {
       order: 2;
     }
 
@@ -314,22 +315,32 @@
     }
 
     .day-media {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      grid-auto-rows: 180px;
-      gap: 10px;
+      column-count: 2;
+      column-gap: 12px;
     }
 
     .day-media a {
       position: relative;
+      display: block;
+      break-inside: avoid;
+      height: 235px;
+      margin: 0 0 12px;
       overflow: hidden;
       border-radius: 10px;
       background: var(--soft);
       text-decoration: none;
     }
 
-    .day-media a:first-child {
-      grid-row: span 2;
+    .day-media a:nth-child(3n + 1) {
+      height: 330px;
+    }
+
+    .day-media a:nth-child(3n + 2) {
+      height: 200px;
+    }
+
+    .day-media a:nth-child(3n) {
+      height: 260px;
     }
 
     .day-media img {
@@ -353,6 +364,88 @@
       color: #fff;
       font-size: 0.76rem;
       font-weight: 900;
+    }
+
+    .travel-card {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: linear-gradient(180deg, #f7fbfb, #edf5f7);
+      box-shadow: 0 14px 34px rgba(20, 35, 28, 0.08);
+    }
+
+    .travel-card h4 {
+      margin: 12px 0 6px;
+      color: var(--green-dark);
+      font-size: 0.84rem;
+      text-transform: uppercase;
+    }
+
+    .travel-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .travel-icons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 16px;
+    }
+
+    .travel-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(47, 111, 159, 0.18);
+      border-radius: 999px;
+      background: #fff;
+      font-size: 1.45rem;
+      box-shadow: 0 8px 18px rgba(47, 111, 159, 0.1);
+    }
+
+    .travel-legs {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .travel-leg {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 11px;
+      border: 1px solid rgba(47, 111, 159, 0.12);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .travel-leg .leg-icon {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: var(--mist);
+      color: var(--blue);
+      font-size: 1.1rem;
+    }
+
+    .travel-leg strong {
+      display: block;
+      color: var(--ink);
+      font-size: 0.96rem;
+      line-height: 1.25;
+    }
+
+    .travel-leg span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.45;
     }
 
     .day-kicker {
@@ -406,6 +499,33 @@
       color: var(--muted);
       font-size: 1.06rem;
       margin-bottom: 18px;
+    }
+
+    .guide-sections {
+      display: grid;
+      gap: 12px;
+      margin: 18px 0 20px;
+    }
+
+    .guide-section {
+      padding: 15px 16px;
+      border-left: 4px solid var(--green);
+      border-radius: 0 10px 10px 0;
+      background: var(--soft);
+    }
+
+    .guide-section h4 {
+      margin: 0 0 6px;
+      color: var(--green-dark);
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .guide-section p {
+      color: var(--ink);
+      font-size: 0.98rem;
+      line-height: 1.55;
     }
 
     .detail-grid {
@@ -464,6 +584,10 @@
     .link-card p {
       color: var(--muted);
       font-size: 0.94rem;
+    }
+
+    .link-card p + p {
+      margin-top: 10px;
     }
 
     .table-wrap {
@@ -550,6 +674,7 @@
       }
 
       .day-story:nth-child(even) .day-media,
+      .day-story:nth-child(even) .travel-card,
       .day-story:nth-child(even) .day-copy {
         order: initial;
       }
@@ -597,13 +722,14 @@
       }
 
       .day-media {
-        grid-template-columns: 1fr 1fr;
-        grid-auto-rows: 150px;
+        column-count: 1;
       }
 
-      .day-media a:first-child {
-        grid-column: span 2;
-        grid-row: span 1;
+      .day-media a,
+      .day-media a:nth-child(3n + 1),
+      .day-media a:nth-child(3n + 2),
+      .day-media a:nth-child(3n) {
+        height: 245px;
       }
     }
   </style>
@@ -612,7 +738,7 @@
   <header class="hero">
     <div class="hero-inner">
       <h1>Guatemala 2026 reisschema</h1>
-      <p class="hero-copy">Van Antigua en Acatenango naar El Remate/Tikal, Semuc Champey, Lake Atitlan en een laatste Antigua-avond. Vaste werkroute met compacte jungle, water, vulkanen en een duidelijke airport-positionering.</p>
+      <p class="hero-copy">Van Antigua en Acatenango naar El Remate/Tikal, Semuc Champey, Lake Atitlan en een laatste Antigua-avond. Vaste werkroute met compacte jungle, water, vulkanen en actieve rustdagen die niet aanvoelen als wachten.</p>
       <div class="hero-meta">
         <a class="pill" href="#reisschema">23 juli - 10 augustus</a>
         <a class="pill" href="#map">Routekaart</a>
@@ -626,13 +752,13 @@
   <main>
     <section id="reisschema">
       <h2>Reisschema</h2>
-      <p class="lead">Dit is geen voorbeeld meer maar de vaste werkvariant. Reistijden zijn expliciet gemarkeerd zodat we de zware transferdagen niet onderschatten.</p>
+      <p class="lead">Dit is geen voorbeeld meer maar de vaste werkvariant. Reistijden zijn expliciet gemarkeerd en de activiteitendagen hebben nu een duidelijk dagritme, zodat de rustige dagen nog altijd reiservaring zijn.</p>
       <div class="schema-grid" id="schema-grid"></div>
       <div class="stats">
         <div class="stat"><strong>18</strong><span>nachten in Guatemala inclusief Acatenango</span></div>
         <div class="stat"><strong>5</strong><span>grote reis- of transferdagen</span></div>
         <div class="stat"><strong>1</strong><span>bevestigd hotel: L'Aurora Inn</span></div>
-        <div class="stat"><strong>2</strong><span>vaste hikes: Acatenango en Indian Nose</span></div>
+        <div class="stat"><strong>6</strong><span>actieve ankers naast de transferdagen</span></div>
       </div>
     </section>
 
@@ -649,7 +775,7 @@
 
     <section id="dagplanning">
       <h2>Dag per dag</h2>
-      <p class="lead">Blogstijl per dag: wat ligt vast, wat kan, waar moeten we nog boeken, en welke beelden helpen om de sfeer te voelen.</p>
+      <p class="lead">Blogstijl per dag: bij activiteitendagen staat nu hoe de dag voelt, welke keuze de dag maakt, hoe de dag praktisch opgebouwd is en welke randvoorwaarden nog moeten kloppen.</p>
       <div class="story-list" id="story-list"></div>
     </section>
 
@@ -673,7 +799,7 @@
             <tr><td>El Remate</td><td>28-31 jul</td><td>3</td><td class="status-open">Nog te boeken</td><td>Lake/jungle basis voor Tikal en Peten extra.</td></tr>
             <tr><td>Lanquin / Semuc</td><td>31 jul-3 aug</td><td>3</td><td class="status-open">Nog te boeken</td><td>Park-access logistiek boven kleine prijsverschillen.</td></tr>
             <tr><td>Lake Atitlan</td><td>3-7 aug</td><td>4</td><td class="status-open">Nog te boeken</td><td>Vier nachten lake/dorpen/water voor het einde.</td></tr>
-            <tr><td>Antigua afsluiter</td><td>7-8 aug</td><td>1</td><td class="status-open">Nog te boeken</td><td>Laatste avond; Pacaya is de extra vulkaanoptie.</td></tr>
+            <tr><td>Antigua afsluiter</td><td>7-8 aug</td><td>1</td><td class="status-open">Nog te boeken</td><td>Laatste avond; Pacaya blijft reserve, niet de default.</td></tr>
             <tr><td>L'Aurora Inn</td><td>8-9 aug</td><td>1</td><td class="status-booked">Geboekt</td><td>2 kamers, EUR 131, free cancellation; vroege shuttle bevestigen.</td></tr>
           </tbody>
         </table>
@@ -681,8 +807,8 @@
     </section>
 
     <section id="slaapvoorstellen">
-      <h2>Slaapvoorstellen en tourlinks</h2>
-      <p class="lead">Dit zijn opties om vanuit de planning door te klikken. Alleen L'Aurora Inn is geboekt; de rest blijft shortlist en moet opnieuw op beschikbaarheid/prijs gecontroleerd worden.</p>
+      <h2>Boekingslinks, operators en activiteiten</h2>
+      <p class="lead">Slaapvoorstellen, tourleads, shuttle-sites en activiteitoperatoren op een plek. Alleen L'Aurora Inn is geboekt; de rest blijft shortlist en moet opnieuw op beschikbaarheid, tijden, bagage en prijs gecontroleerd worden.</p>
       <div class="booking-links" id="booking-links"></div>
     </section>
 
@@ -705,13 +831,16 @@
         <div class="link-card"><h3>Route Guatemala</h3><p><a href="https://reisplaatje.nl/route-guatemala/">Reisplaatje routeartikel</a> voor plaatsbeschrijvingen, reistijden en hotel-leads.</p></div>
         <div class="link-card"><h3>Acatenango</h3><p><a href="https://reisplaatje.nl/acatenango-vulkaan-beklimmen/">Reisplaatje Acatenango</a>, <a href="https://lava-trails.com/">Lava Trails</a> en <a href="https://wichoandcharlies.com/">Wicho & Charlie's</a>.</p></div>
         <div class="link-card"><h3>Atitlan + Semuc</h3><p><a href="https://reisplaatje.nl/wat-te-doen-lake-atitlan/">Lake Atitlan</a> en <a href="https://reisplaatje.nl/tips-semuc-champey/">Semuc Champey</a> tips.</p></div>
+        <div class="link-card"><h3>Peten operators</h3><p><a href="https://www.toursguatemala.com/index.php/day-tour/from-flores/130-yaxha-sunset">Turismo Aventura Yaxha</a>, <a href="https://www.losmayas.de/">Los Mayas</a> en <a href="https://www.viator.com/Flores-attractions/Yaxha/d5374-a12545">Viator Yaxha</a>.</p></div>
+        <div class="link-card"><h3>Atitlan water</h3><p><a href="https://supatitlan.com/">Stand Up Paddle Atitlan</a>, <a href="https://kayakguatemala.com/tour/kayak-paddle-board-guatemala/">Kayak Guatemala</a> en <a href="https://www.tours-atitlan.com/index.html">Tours Atitlan</a>.</p></div>
         <div class="link-card"><h3>Pacaya</h3><p><a href="https://oxexpeditions.com/tour-category/pacaya-volcano/">OX Expeditions Pacaya</a> als extra vulkaanwandeling vanuit Antigua.</p></div>
+        <div class="link-card"><h3>Flickr beelden</h3><p>Yaxha en Peten-beelden uit Flickr-pagina's van Stefano Ravalli, Rodolfo Valverde, elhawk en Matt Champlin voor deze priveplanning.</p></div>
       </div>
     </section>
   </main>
 
   <footer>
-    Private familieplanning. Beelden komen uit lokale reisplanning, Reisplaatje, Reisjunk en Wikimedia-bronnen; niet bedoeld als commerciele publicatie.
+    Private familieplanning. Beelden komen uit lokale reisplanning, Reisplaatje, Reisjunk, Flickr en Wikimedia-bronnen; niet bedoeld als commerciele publicatie.
   </footer>
 
   <script src="https://unpkg.com/maplibre-gl@5.9.0/dist/maplibre-gl.js"></script>
@@ -741,6 +870,10 @@
       semucHotel: "assets/reisplaatje-2026/semuc-hotel-el-portal.jpg",
       tikal: "assets/reisplaatje-gallery/tikal-main.jpg",
       tikalJungle: "assets/reisplaatje-gallery/tikal-jungle.jpg",
+      yaxhaTemple: "assets/flickr-peten/yaxha-stefano-ravalli.jpg",
+      yaxhaRedHands: "assets/flickr-peten/yaxha-red-hands-temple.jpg",
+      petenSunset: "assets/flickr-peten/lake-peten-itza-sunset.jpg",
+      petenDock: "assets/flickr-peten/lake-peten-itza-swim.jpg",
       rio: "assets/wikimedia/rio-dulce-bbclcd.jpg",
       rioIzabal: "assets/wikimedia-gallery/rio-dulce-izabal.jpg"
     };
@@ -754,11 +887,17 @@
         load: "High travel",
         travel: "GUA -> Antigua: ca. 1u na landing",
         fixed: "Late transfer vooraf regelen",
-        summary: "Aankomst om 20:30 in Guatemala City en meteen door naar Antigua. Geen avondplan; deze dag draait volledig om betrouwbaar landen en slapen.",
+        mode: "travel",
+        summary: "Volledige vliegdag richting Guatemala, met aankomst om 20:30 in Guatemala City en daarna meteen door naar Antigua. De enige ambitie is soepel landen, bagage hebben, instappen bij de vooraf geregelde transfer en zonder extra avondprogramma inchecken.",
+        travelPlan: [
+          { icon: "✈", title: "BRU -> IAD -> GUA", text: "Internationale vlucht met aankomst in Guatemala City om 20:30 volgens de huidige planning." },
+          { icon: "🚐", title: "Luchthaven -> Antigua", text: "Reken ongeveer 1 uur rijden na landing, plus marge voor immigratie, bagage en eventuele vertraging." },
+          { icon: "🛏", title: "Late check-in", text: "Hotel in Antigua moet late ontvangst, eenvoudige bagage en snelle kamercheck-in bevestigen." }
+        ],
         images: [[img.antiguaArco, "Antigua als eerste slaapbasis"], [img.antigua1, "Straatbeeld Antigua"], [img.antigua2, "Koloniale sfeer"]],
         details: {
           "Vast": ["Vlucht BRU -> IAD -> GUA.", "Slapen in Antigua, niet aan de luchthaven.", "Late check-in moet bevestigd zijn."],
-          "Nog regelen": ["GUA -> Antigua transfer met marge op vertraging.", "Hotel met late ontvangst en makkelijke bagage."]
+          "Nog regelen": ["GUA -> Antigua transfer met marge op vertraging.", "Hotel met late ontvangst en makkelijke bagage.", "Naam, WhatsApp en pickup point van chauffeur vooraf bewaren."]
         }
       },
       {
@@ -769,7 +908,17 @@
         load: "Low",
         travel: "Lokaal wandelen / tuk-tuk",
         fixed: "Acclimatiseren",
-        summary: "Eerste volledige dag: ontbijt, Arco de Santa Catalina, plaza, lichte stadswandeling, koffie of markt. Antigua is hier landing en acclimatisatie voor Acatenango.",
+        summary: "De eerste volledige dag voelt als rustig landen zonder stil te vallen. Start met ontbijt in het centrum, wandel langs de Arco de Santa Catalina en de plaza, kies daarna koffie, markt of een paar koloniale binnenplaatsen. Antigua is vandaag geen checklist maar een zachte kennismaking met Guatemala, met genoeg beweging om de vlucht uit de benen te krijgen.",
+        guide: [
+          {
+            title: "Hoe de dag voelt",
+            text: "Dit is de zachte start van de reis, maar niet een lege rustdag. Antigua geeft meteen kleur: koloniale straten, vulkaanuitzichten, koffie, pleinen en genoeg beweging om het lichaam wakker te maken na de vlucht."
+          },
+          {
+            title: "Dagopbouw",
+            text: "Ochtend voor de mooiste straten, kerkruines en pleinen; namiddag los voor cafe, rooftop view, markt of gewoon een trage wandeling terug naar het hotel. De dag mag actief zijn, zolang hij licht blijft aanvoelen."
+          }
+        ],
         images: [[img.antiguaArco, "Arco de Santa Catalina"], [img.antigua1, "Antigua straatbeeld"], [img.antigua2, "Antigua details"]],
         details: {
           "Doen": ["Arco de Santa Catalina.", "Centrale wandeling en plaza.", "Cafe, markt of rooftop view."],
@@ -780,15 +929,26 @@
         day: 3,
         date: "za 25 jul",
         base: "Antigua",
-        title: "Antigua cultuur en vulkaanprep",
-        load: "Low-medium",
+        title: "Actieve Antigua-vallei en vulkaanprep",
+        load: "Medium",
         travel: "Lokaal",
         fixed: "Vroege nacht",
-        summary: "Tweede acclimatisatiedag. Markt, food, koffie/chocolade en alles klaarzetten voor de hike: laagjes, water, snacks, headlamp, cash en schoenen.",
+        summary: "Tweede acclimatisatiedag, maar nu met een echte activiteit. De beste match is een halve dag coffee bike/e-bike tour of een speelse Antigua-vallei-uitstap, gevolgd door gear check en vroeg slapen.",
+        guide: [
+          {
+            title: "Waarom deze dag erin zit",
+            text: "Dag 3 voelde te veel als nog eens Antigua. Door hem als actieve warm-up te boeken, krijgt de dag een eigen reden: bewegen, koffiecultuur, buiten de stad komen en toch geen benen slopen voor Acatenango."
+          },
+          {
+            title: "Beste keuze",
+            text: "De coffee bike tour is de scherpste optie: landschap, lokale economie, koffieproces en beweging in een halve dag. De e-bike versie is duurder maar spaart energie. Hobbitenango of Altamira is luchtiger en meer uitzicht/novelty."
+          }
+        ],
         images: [[img.antigua2, "Antigua voorbereiding"], [img.antiguaArco, "Stad tussen vulkanen"]],
         details: {
-          "Doen": ["Markt/cultuur op rustig tempo.", "Goede lunch of vroeg diner.", "Vroege nacht voor de hike."],
-          "Nog regelen": ["Lava Trails definitief bevestigen.", "Wicho & Charlie's vergelijken als cabin/hut-alternatief."]
+          "Doen": ["Halve dag coffee bike/e-bike of vallei-uitstap.", "Lunch en terug naar hotel zonder avondstress.", "Vroege nacht voor de hike."],
+          "Operators": ["Old Town Outfitters voor Sip n' Cycle of valley ride.", "OX Expeditions Coffee Addict als alternatief.", "Hobbitenango alleen als luchtige uitzichtdag, niet als must-do."],
+          "Nog regelen": ["Lava Trails definitief bevestigen.", "Wicho & Charlie's vergelijken als cabin/hut-alternatief.", "Check dat de dagactiviteit vroeg genoeg eindigt voor gear prep."]
         }
       },
       {
@@ -799,12 +959,22 @@
         load: "High",
         travel: "Hike omhoog: ca. 4,5u incl. breaks",
         fixed: "Lava Trails primair",
-        summary: "De zwaarste vulkaandag van de reis. Rustig tempo, kleine stappen, voldoende water, basecamp bij Acatenango en Fuego als add-on volgens gidsbriefing, weer en vulkaanstatus.",
+        summary: "De zwaarste vulkaandag van de reis en waarschijnlijk ook een van de meest memorabele. De dag draait rond de klim naar basecamp, aankomen boven de wolken, warme lagen aantrekken en 's avonds Fuego zien oplichten als de omstandigheden meezitten.",
+        guide: [
+          {
+            title: "Waarom dit de grote anchor is",
+            text: "Acatenango is het ruwe avontuur van de reis: hoogte, kou, vulkaanzand, basecamp en uitzicht op Fuego. Dit is geen dag die je tussen twee drukke city tours propt; alles ervoor en erna moet hem ondersteunen."
+          },
+          {
+            title: "Fuego als extra optie",
+            text: "Fuego is een optionele uitbreiding bovenop Acatenango. Bij het boeken gewoon vragen hoe de add-on werkt, wat hij extra kost en wanneer de gids hem wel of niet aanbiedt op basis van weer, zicht en vulkaanstatus."
+          }
+        ],
         images: [[img.acatenangoMain, "Acatenango en Fuego"], [img.acatenangoTrail, "Vulkaanpad"], [img.acatenangoUser, "Sfeerbeeld hike"]],
         details: {
           "Operator": ["Primair: Lava Trails.", "Alternatief: Wicho & Charlie's voor hut/cabin-slaap.", "Fuego add-on wordt ter plekke door gids en condities bepaald."],
           "Prep": ["Minimaal 4 liter water per persoon.", "Laagjes, regen/wind shell, headlamp, handschoenen, muts.", "50Q park entry en mogelijke 200Q Fuego add-on checken."],
-          "Pacing": ["Eigen tempo boven groepsdruk.", "Wandelstokken serieus overwegen.", "Porter overwegen als rugzakken zwaar worden."]
+          "Praktisch": ["Wandelstokken en porter vooraf afwegen.", "Warme laag makkelijk bereikbaar houden.", "Cash voorzien voor park entry, add-on en fooi."]
         }
       },
       {
@@ -815,7 +985,17 @@
         load: "High -> low",
         travel: "Summit ca. 1u, afdaling ca. 2u",
         fixed: "Recovery hotel",
-        summary: "Sunrise vanaf basecamp of summit volgens gidsbriefing, afdalen en terug naar Antigua. De rest van de dag is voor douche, eten, laundry en herstel.",
+        summary: "De dag begint nog voor zonsopgang, met uitzicht vanaf basecamp of de summit volgens de gidsbriefing. Daarna volgt ontbijt op hoogte, afdalen door vulkaanzand en terug naar Antigua. Tegen de namiddag is het belangrijkste niet sightseeing, maar weer schoon, warm, gevoed en georganiseerd zijn voor de vlucht naar Peten.",
+        guide: [
+          {
+            title: "Hoe de dag voelt",
+            text: "Dit is nog altijd een activiteitendag: vroeg donker opstaan, eventueel de summit push, ontbijt op hoogte en afdalen door moeie benen. Daarna moet Antigua alles oplossen: douche, droge kleren, comfort en eten."
+          },
+          {
+            title: "Na aankomst in Antigua",
+            text: "Plan alleen praktische dingen: douche, lunch, laundry, droge kleren en eventueel een korte wandeling als daar vanzelf nog energie voor is. Een vlotte check-in is hier belangrijker dan extra charme."
+          }
+        ],
         images: [[img.acatenangoBase, "Basecamp"], [img.acatenangoWicho, "Cabin/hut context"], [img.acatenangoMain, "Fuego uitzicht"]],
         details: {
           "Doen": ["Terug naar Antigua en onmiddellijk kunnen douchen.", "Laundry en droge kleren.", "Goed eten en vroeg slapen."],
@@ -830,10 +1010,17 @@
         load: "Travel",
         travel: "Antigua -> GUA -> Flores -> El Remate",
         fixed: "Domestic flight",
-        summary: "Na de vulkaan gaat de route direct naar het noorden. Transfer naar GUA, binnenlandse vlucht naar Flores en door naar El Remate aan Lake Peten Itza.",
+        mode: "travel",
+        summary: "Na Acatenango schuift de route in een keer naar het noorden. Dit is geen fotodag maar een logistieke dag: Antigua naar La Aurora, binnenlandse vlucht naar Flores/Mundo Maya en daarna nog door naar El Remate aan Lake Peten Itza.",
+        travelPlan: [
+          { icon: "🚐", title: "Antigua -> GUA", text: "Reken 1,5 tot 2,5 uur met traffic en luchthavenmarge. Niet te krap plannen na de hike." },
+          { icon: "✈", title: "GUA -> Flores / FRS", text: "Binnenlandse vlucht duurt ongeveer 1 uur. TAG Airlines en Avianca checken op tijden, bagage en wijzigingsvoorwaarden." },
+          { icon: "🚐", title: "Flores -> El Remate", text: "Vanaf Mundo Maya Airport naar El Remate meestal ca. 35-45 minuten met pickup, taxi of lodge-transfer." }
+        ],
         images: [[img.tikalJungle, "Peten jungle"], [img.tikal, "Tikal regio"]],
         details: {
           "Logistiek": ["GUA -> Flores vlucht boeken.", "Domestic baggage rules apart checken.", "Flores -> El Remate pickup regelen."],
+          "Boekingscheck": ["TAG Airlines en Avianca vergelijken.", "Bagagegewicht apart controleren van United.", "Private pickup nuttig als aankomst laat of moe is."],
           "Aankomst": ["Check-in bij lake/jungle lodge.", "Eten op of bij de lodge.", "Tikal guide alvast bevestigen."]
         }
       },
@@ -841,14 +1028,29 @@
         day: 7,
         date: "wo 29 jul",
         base: "El Remate",
-        title: "Lake Peten Itza en Peten extra",
-        load: "Low-medium",
+        title: "Yaxha sunset of Lake Peten Itza",
+        load: "Medium",
         travel: "Lokaal",
         fixed: "Peten extra dag",
-        summary: "De vrije Peten-dag voor Lake Peten Itza, lodge, zwemmen/kayak, Cerro Cahui, Flores/Jorge's Rope Swing of Yaxha sunset.",
-        images: [[img.tikalJungle, "Lago Peten Itza / jungle sfeer"], [img.tikal, "Tikal voorbereiding"]],
+        summary: "De Peten-dag krijgt een echte keuze in plaats van een vage lodge-buffer. Yaxha sunset is de sterkste extra highlight: jungle, tempels, lagunes en zonsondergang zonder dezelfde starttijd als Tikal. De rustigere variant blijft aan Lake Peten Itza met Cerro Cahui, zwemmen, kayak of een korte Flores-uitstap.",
+        guide: [
+          {
+            title: "Waarom deze dag belangrijk is",
+            text: "Zonder duidelijke keuze voelt dit snel als een lodge-buffer. Met Yaxha krijgt de noordelijke lus een tweede Maya/jungle-moment dat anders aanvoelt dan Tikal. Met Cerro Cahui blijft het een actieve natuurdag dicht bij El Remate."
+          },
+          {
+            title: "Yaxha-variant",
+            text: "Neem de ochtend traag aan het meer en vertrek pas in de namiddag richting Yaxha. Dat geeft zonsondergang op een tempel, jungle-sfeer en een extra wow zonder opnieuw een hele vroege start."
+          },
+          {
+            title: "Rustiger alternatief",
+            text: "Cerro Cahui in de ochtend geeft wandelen, uitzicht over Lake Peten Itza en natuur zonder zware logistiek. Daarna blijft er tijd voor zwemmen, kayak of lodge."
+          }
+        ],
+        images: [[img.yaxhaTemple, "Yaxha tempel in de jungle"], [img.petenDock, "Lake Peten Itza"], [img.yaxhaRedHands, "Temple of the Red Hands"], [img.petenSunset, "Peten sunset"]],
         details: {
           "Keuze": ["Yaxha sunset voor een tweede Maya/jungle-highlight.", "Cerro Cahui of lake/kayak voor natuur dicht bij El Remate.", "Flores of Jorge's Rope Swing als luchtige Peten-dag."],
+          "Operators": ["Turismo Aventura Yaxha Sunset als concrete tourlead.", "Los Mayas / Cafe Arqueologico Yaxha als lokale Peten-lead.", "Viator of GetYourGuide alleen als vergelijkingssite."],
           "Hotels": ["Gringo Perdido als sterkste lake/jungle ervaring.", "Posada del Cerro als nuchtere natuurkeuze.", "La Lancha als splurge."]
         }
       },
@@ -861,6 +1063,16 @@
         travel: "Vroeg naar Tikal",
         fixed: "Tikal must-do",
         summary: "De grote Maya-dag van de reis. Vroeg starten, gids nemen, jungle en tempelviewpoints meepakken, daarna terug naar El Remate.",
+        guide: [
+          {
+            title: "Hoe de dag voelt",
+            text: "Tikal is niet alleen ruines afvinken. De dag werkt omdat architectuur, jungle, vogels, apen en uitzichtpunten samenkomen. Dit is de ene grote tempeldag van de reis, dus hij mag diepte krijgen."
+          },
+          {
+            title: "Dagopbouw",
+            text: "Vroeg vertrekken voor koelte, dieren en minder drukte. Neem een gids die cosmovisie, geschiedenis en jungle kan combineren. Na de middag terug naar El Remate en bewust niets groots meer boeken."
+          }
+        ],
         images: [[img.tikal, "Tikal tempels"], [img.tikalJungle, "Jungle rond Tikal"]],
         details: {
           "Doen": ["Guide en early pickup.", "Legal climbable viewpoints.", "Wildlife/jungle aandacht, niet alleen tempels."],
@@ -875,7 +1087,13 @@
         load: "High travel",
         travel: "El Remate/Flores -> Semuc/Lanquin: ca. 7-8u",
         fixed: "Alleen reizen",
-        summary: "Lange verhuisdag van Peten naar Semuc/Lanquin. Vroeg vertrekken, aankomen, eenvoudige avond en lodge/parklogistiek bevestigen.",
+        mode: "travel",
+        summary: "Lange verhuisdag van Peten naar Semuc/Lanquin. Dit is vooral zitten, stoppen, eten en aankomen; geen sightseeingdag. Het doel is bij daglicht vertrekken, geen nachttransfer nemen en bij aankomst meteen lodge- en parklogistiek bevestigen.",
+        travelPlan: [
+          { icon: "🚐", title: "El Remate/Flores -> Lanquin", text: "Reken ca. 7-8 uur op papier, vaak langer met stops, wegcondities en pickup-logistiek." },
+          { icon: "🚙", title: "Laatste stuk naar lodge", text: "Sommige lodges vereisen 4x4, pickup truck of eigen lodge-transfer vanaf Lanquin." },
+          { icon: "🛏", title: "Aankomstdoel", text: "Eenvoudige avond, eten bij de lodge en meteen checken hoe je morgen bij Semuc geraakt." }
+        ],
         images: [[img.semucTransport, "Truck/transfer context"], [img.semucMain, "Semuc sfeer"]],
         details: {
           "Logistiek": ["Shuttle of private transfer vooraf vastleggen.", "Geen nachttransfer.", "Lodge moet ophalen of park-access oplossen."],
@@ -890,10 +1108,24 @@
         load: "Low-medium",
         travel: "Lokaal / lodge truck",
         fixed: "Timing kiezen",
-        summary: "Dag om de Peten-transfer uit het lijf te krijgen en de Semuc-dag strak te zetten. Zwemmen, rivier, lezen, simpele avond.",
+        summary: "Actieve bufferdag na de Peten-transfer. Geen lege lodge-dag: rivier, tubing, caves, bat cave of de Semuc-pools naar voren schuiven als het weer goed zit.",
+        guide: [
+          {
+            title: "Waarom buffer niet passief is",
+            text: "Semuc heeft de zwaarste bereikbaarheid van de route. Deze dag voorkomt dat alles gehaast wordt, maar blijft actief genoeg: water, jungle, lokale logistiek en eventueel een lichte tour."
+          },
+          {
+            title: "Weerknop",
+            text: "Als de beste weerswindow op deze dag valt, schuif mirador en pools naar voren. Dan wordt dag 11 de rustigere river/caves-dag. Dit is precies waarom Semuc drie nachten krijgt."
+          },
+          {
+            title: "Goede invulling",
+            text: "Begin met lodge/parkadvies, kies daarna rivierzwemmen, tubing of caves volgens waterstand. Houd de avond simpel en leg de lange transfer naar Atitlan al vast."
+          }
+        ],
         images: [[img.semucMain, "Semuc groen"], [img.semucHotel, "Hotel/lodge context"]],
         details: {
-          "Doen": ["Rustige rivier/jungle dag.", "Semuc timing met lodge bespreken.", "Parktransport bevestigen."],
+          "Doen": ["Rivier/jungle dag met lichte activiteit.", "Semuc timing met lodge bespreken.", "Parktransport bevestigen."],
           "Nog regelen": ["Park entry cash.", "Waterschoenen en droge tas.", "Transfer naar Lake Atitlan bevestigen."]
         }
       },
@@ -906,6 +1138,20 @@
         travel: "Lokaal naar park",
         fixed: "Mirador + pools",
         summary: "De Semuc-kern ligt vast: eerst naar het uitzichtpunt, daarna afkoelen in de poelen. Caves en tubing zijn add-ons.",
+        guide: [
+          {
+            title: "Beste volgorde",
+            text: "Eerst naar de mirador, daarna pas zwemmen. De wandeling is warmer en gladder later op de dag; de poelen zijn net de beloning erna. Start daarom voor 10:00."
+          },
+          {
+            title: "Wat maakt dit de moeite",
+            text: "Semuc is logistiek lastig, maar het uitzicht vanaf de mirador en het zwemmen in de kalkstenen poelen geven de stop zijn bestaansreden. De dag moet rond die twee dingen gebouwd worden."
+          },
+          {
+            title: "Add-ons",
+            text: "Caves en tubing zijn leuk als waterstand, weer en energie goed zitten. Ze zijn geen reden om mirador en pools te verzwaren of te missen."
+          }
+        ],
         images: [[img.semucPools, "Semuc pools"], [img.semucMain, "Semuc jungle"], [img.semucTransport, "Lokale toegang"]],
         details: {
           "Vast": ["Voor 10:00 starten.", "50Q park entry volgens Reisplaatje.", "Mirador rustig omhoog, daarna zwemmen."],
@@ -921,7 +1167,13 @@
         load: "High travel",
         travel: "Semuc/Lanquin -> Atitlan: ca. 11u",
         fixed: "Reisdag",
-        summary: "De zwaarste resterende transferdag. Aankomen bij het meer, check-in, eten en slapen. Atitlan krijgt daarna drie volle dagen.",
+        mode: "travel",
+        summary: "De zwaarste resterende transferdag: van de vochtige jungle rond Semuc helemaal naar de hooglanden van Lake Atitlan. Deze dag hoeft niets te bewijzen; hij moet vooral goed georganiseerd zijn zodat het meer daarna drie volle dagen ruimte krijgt.",
+        travelPlan: [
+          { icon: "🚐", title: "Lanquin/Semuc -> Panajachel/Atitlan", text: "Reken ca. 10-11 uur en mogelijk meer afhankelijk van shuttle, stops en wegen." },
+          { icon: "⛵", title: "Laatste lake-hop", text: "Als de base niet Panajachel is, komt er nog een lancha of korte lokale transfer bij." },
+          { icon: "🛏", title: "Aankomstdoel", text: "Check-in, lakeside dinner en slapen. De activiteiten starten pas morgen." }
+        ],
         images: [[img.atitlanUser, "Lake Atitlan"], [img.atitlanVillages, "Dorpjes rond het meer"]],
         details: {
           "Logistiek": ["Vroeg vertrekken.", "Atitlan base vooraf kiezen.", "Indian Nose pickup afstemmen op de gekozen base."],
@@ -936,7 +1188,7 @@
         load: "Low-medium",
         travel: "Lokale boten",
         fixed: "Lake day",
-        summary: "Dorpjes per boot, San Marcos of San Juan, Jaibalito naar Santa Cruz, kayak of SUP in de ochtend.",
+        summary: "Eerste echte dag aan Lake Atitlan: het water in de ochtend, dorpjes per lancha en een korte wandeling zonder grote transferdruk. De sterkste combinatie is vroeg kayak of SUP wanneer het meer kalm is, daarna Jaibalito naar Santa Cruz of San Juan/San Marcos als dorpenlus.",
         images: [[img.atitlanWalk, "Jaibalito naar Santa Cruz"], [img.atitlanKayak, "Kayak op het meer"], [img.atitlanSup, "SUP optie"]],
         details: {
           "Activiteiten": ["Jaibalito -> Santa Cruz wandeling van ca. 45 minuten.", "SUP Santa Cruz -> San Marcos met Stand Up Paddle Atitlan.", "Kajakken in de ochtend wanneer het water kalm is."],
@@ -997,7 +1249,13 @@
         load: "Medium -> low",
         travel: "Antigua -> L'Aurora Inn: ca. 1-1,5u + traffic",
         fixed: "Hotel geboekt",
-        summary: "Slow morning in Antigua, koffie/markt/laatste wandeling, daarna naar L'Aurora Inn. De avond is voor documenten, bagage en vroeg slapen.",
+        mode: "travel",
+        summary: "Laatste rustige ochtend in Antigua, daarna bewust naar de luchthavenzone. Deze dag is een gecontroleerde afronding: koffie of markt in de voormiddag, transfer naar L'Aurora Inn met verkeersmarge, documenten klaarleggen en vroeg slapen voor de 06:15 vlucht.",
+        travelPlan: [
+          { icon: "🚐", title: "Antigua -> L'Aurora Inn", text: "Reken ca. 1-1,5 uur plus traffic. Vertrek ruim genoeg zodat de laatste avond niet zenuwachtig wordt." },
+          { icon: "🧳", title: "Bagage en documenten", text: "Paspoorten, ESTA, boarding, vloeistoffen en handbagage 's avonds volledig klaar." },
+          { icon: "🛏", title: "Airport hotel", text: "L'Aurora Inn is geboekt voor twee kamers; shuttle/pickup-tijd nog expliciet bevestigen." }
+        ],
         images: [[img.antiguaArco, "Laatste wandeling Antigua"], [img.hero, "Route rond"]],
         details: {
           "Vast": ["L'Aurora Inn is geboekt voor 2 kamers.", "06:15 vlucht bepaalt de ochtend.", "Aankomst bij airport hotel in de namiddag."],
@@ -1012,7 +1270,13 @@
         load: "Travel",
         travel: "GUA 06:15 vertrek",
         fixed: "Vroege shuttle",
-        summary: "Heel vroeg naar de luchthaven en via de VS terug richting Brussel. Alles staat de avond ervoor klaar.",
+        mode: "travel",
+        summary: "Heel vroeg naar de luchthaven en via de VS terug richting Brussel. Omdat de vlucht om 06:15 vertrekt, moet deze dag al de avond voordien opgelost zijn: shuttle, documenten, bagage en ontbijt/snacks.",
+        travelPlan: [
+          { icon: "🚐", title: "L'Aurora Inn -> GUA", text: "Vroege shuttle of hoteltransfer bevestigen, met pickup-tijd ruim voor check-in/security." },
+          { icon: "✈", title: "GUA -> IAH -> ORD -> BRU", text: "Lange terugreis via de VS; ESTA en transitdocumenten moeten offline beschikbaar zijn." },
+          { icon: "🧳", title: "Geen ochtendbeslissingen", text: "Alles staat klaar voor vertrek. Alleen opstaan, instappen en vliegen." }
+        ],
         images: [[img.hero, "Route rond"], [img.antiguaArco, "Einde van de reis"]],
         details: {
           "Vast": ["GUA 06:15 -> IAH -> ORD -> BRU.", "Geen ochtendbeslissingen meer."],
@@ -1027,7 +1291,13 @@
         load: "Travel recovery",
         travel: "BRU 09:00",
         fixed: "Thuiskomen",
-        summary: "Aankomst in Brussel om 09:00. Geen planning meer, alleen landen.",
+        mode: "travel",
+        summary: "Aankomst in Brussel om 09:00. Dit is geen reisdag meer met inhoud, alleen landen, bagage ophalen, naar huis en ruimte laten voor jetlag en was.",
+        travelPlan: [
+          { icon: "✈", title: "Aankomst Brussel", text: "BRU 09:00 volgens de huidige vluchtplanning." },
+          { icon: "🚗", title: "Naar huis", text: "Geen extra afspraken of plannen op deze dag." },
+          { icon: "🧺", title: "Recovery", text: "Jetlag, was en rustig opnieuw landen." }
+        ],
         images: [[img.atitlanUser, "Laatste sfeerbeeld"], [img.acatenangoUser, "Terugblik avontuur"]],
         details: {
           "Doen": ["Niets plannen.", "Jetlag en was."]
@@ -1038,7 +1308,7 @@
     const bookingBlocks = [
       {
         title: "Acatenango operators",
-        meta: "26-27 jul · tour lodging",
+        meta: "26-27 jul · overnight volcano",
         note: "Lava Trails blijft primair. Wicho & Charlie's is het alternatief voor hut/cabin-slaap en extra comfort.",
         links: [
           ["Lava Trails", "https://lava-trails.com/", "primary operator"],
@@ -1046,22 +1316,38 @@
         ]
       },
       {
-        title: "Lake Atitlan",
-        meta: "3-7 aug · Panajachel/San Marcos focus",
-        note: "Vier nachten als lake block voor het einde. Booking.com opnieuw filteren op 4 volwassenen / 2 kamers.",
+        title: "Antigua actieve warm-up",
+        meta: "25 jul · coffee bike / e-bike / vallei",
+        note: "Hiermee krijgt dag 3 een echte reden zonder er een tweede vulkaandag van te maken.",
         links: [
-          ["Kawoq", "https://www.booking.com/hotel/gt/casa-kawoq.en.html", "budget / lake guesthouse"],
-          ["Eco Hotel Uxlabil", "https://www.booking.com/hotel/gt/eco-uxlabil-atitla-n.en.html", "nature comfort"],
-          ["Booking search", "https://www.booking.com/searchresults.html?ss=Lake%20Atitlan%20Guatemala&checkin=2026-08-03&checkout=2026-08-07&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR&order=review_score_and_price", "date-filtered"]
+          ["Old Town Outfitters", "https://adventureguatemala.com/", "bike operator"],
+          ["Sip n' Cycle", "https://www.expedia.com/things-to-do/antigua-sip-n-cycle-half-day-bike-ride-and-coffee-tour.a4755915.activity-details", "bookable tour"],
+          ["OX Coffee Addict", "https://oxexpeditions.com/tours/coffee-addict/", "bike alternative"],
+          ["Hobbitenango", "https://hobbitenango.com/", "view / fun option"]
         ]
       },
       {
-        title: "Indian Nose tour",
-        meta: "Dag 8 · sunrise fixed",
-        note: "Met gids/tour boeken voor veiligheid. Pickup hangt af van gekozen Atitlan-base.",
+        title: "Binnenlandse vlucht en shuttles",
+        meta: "28 jul + lange transfers",
+        note: "Voor GUA-Flores eerst airline-tijden en bagage checken; voor lange ritten prijzen naast private transfers leggen.",
         links: [
-          ["Kayak Guatemala", "https://kayakguatemala.com/tour/indian-nose-hike-lake-atitlan/", "tour lead"],
-          ["Tours Atitlan", "https://tours-atitlan.com/indian-nose-guatemala-hike.html", "Panajachel lead"]
+          ["TAG Airlines", "https://tagairlines.com/es-gt/", "GUA-FRS airline"],
+          ["Avianca", "https://www.avianca.com/en/", "GUA-FRS compare"],
+          ["GuateGo", "https://www.guatego.com/", "shuttle booking"],
+          ["Shuttle Nation", "https://www.shuttlenation.com/", "route booking"],
+          ["Sertursa", "https://sertursa.com/", "private transfers"]
+        ]
+      },
+      {
+        title: "El Remate, Tikal en Yaxha",
+        meta: "28-31 jul · lake/jungle block",
+        note: "El Remate draagt de lake/jungle-rol: water, lodge, Tikal en een Peten extra dag met Yaxha als sterkste optie.",
+        links: [
+          ["Gringo Perdido", "https://www.hotelgringoperdido.com/", "lake/jungle lodge"],
+          ["Posada del Cerro", "https://www.booking.com/hotel/gt/posada-del-cerro.html", "nature lodge"],
+          ["Turismo Aventura Yaxha", "https://www.toursguatemala.com/index.php/day-tour/from-flores/130-yaxha-sunset", "sunset tour"],
+          ["Los Mayas Yaxha", "https://www.losmayas.de/", "local Peten lead"],
+          ["Viator Yaxha", "https://www.viator.com/Flores-attractions/Yaxha/d5374-a12545", "booking compare"]
         ]
       },
       {
@@ -1075,13 +1361,32 @@
         ]
       },
       {
-        title: "El Remate / Tikal",
-        meta: "28-31 jul · El Remate focus",
-        note: "El Remate draagt de lake/jungle-rol: water, lodge, Tikal en een Peten extra dag.",
+        title: "Lake Atitlan hotels",
+        meta: "3-7 aug · Panajachel/San Marcos focus",
+        note: "Vier nachten als lake block voor het einde. Booking.com opnieuw filteren op 4 volwassenen / 2 kamers.",
         links: [
-          ["Gringo Perdido", "https://www.hotelgringoperdido.com/", "lake/jungle lodge"],
-          ["Posada del Cerro", "https://www.booking.com/hotel/gt/posada-del-cerro.html", "nature lodge"],
-          ["La Lancha", "https://thecoppolahideaways.com/la-lancha/locations/guatemala-hotel/", "splurge"]
+          ["Kawoq", "https://www.booking.com/hotel/gt/casa-kawoq.en.html", "budget / lake guesthouse"],
+          ["Eco Hotel Uxlabil", "https://www.booking.com/hotel/gt/eco-uxlabil-atitla-n.en.html", "nature comfort"],
+          ["Booking search", "https://www.booking.com/searchresults.html?ss=Lake%20Atitlan%20Guatemala&checkin=2026-08-03&checkout=2026-08-07&group_adults=4&no_rooms=2&group_children=0&selected_currency=EUR&order=review_score_and_price", "date-filtered"]
+        ]
+      },
+      {
+        title: "SUP en kayak Atitlan",
+        meta: "4 of 6 aug · wateractiviteit",
+        note: "Voor Atitlan liefst ochtend op het water: rustiger meer, mooier licht en daarna nog dorpjes per boot.",
+        links: [
+          ["Stand Up Paddle Atitlan", "https://supatitlan.com/", "SUP specialist"],
+          ["Kayak Guatemala rentals", "https://kayakguatemala.com/tour/kayak-paddle-board-guatemala/", "kayak / SUP"],
+          ["Tours Atitlan", "https://www.tours-atitlan.com/index.html", "private lake tours"]
+        ]
+      },
+      {
+        title: "Indian Nose tour",
+        meta: "5 aug · sunrise fixed",
+        note: "Met gids/tour boeken voor veiligheid. Pickup hangt af van gekozen Atitlan-base.",
+        links: [
+          ["Kayak Guatemala", "https://kayakguatemala.com/tour/indian-nose-hike-lake-atitlan/", "tour lead"],
+          ["Tours Atitlan", "https://tours-atitlan.com/indian-nose-guatemala-hike.html", "Panajachel lead"]
         ]
       },
       {
@@ -1130,23 +1435,50 @@
     function renderDays() {
       const target = document.getElementById("story-list");
       target.innerHTML = days.map((day) => {
-        const gallery = day.images.map(([src, caption]) => `
+        const isTravelDay = day.mode === "travel";
+        const gallery = (day.images || []).map(([src, caption]) => `
           <a href="${src}" data-lg-size="1400-933" data-sub-html="${escapeHtml(caption)}">
             <img src="${src}" alt="${escapeHtml(caption)}" loading="lazy">
             <span>${escapeHtml(caption)}</span>
           </a>
         `).join("");
 
+        const travelCard = `
+          <div class="travel-card">
+            <div class="travel-icons">${(day.travelPlan || []).map((leg) => `<span class="travel-icon" aria-hidden="true">${escapeHtml(leg.icon)}</span>`).join("")}</div>
+            <h4>Reisdag</h4>
+            <p>${escapeHtml(day.travel)}</p>
+            <div class="travel-legs">
+              ${(day.travelPlan || []).map((leg) => `
+                <div class="travel-leg">
+                  <span class="leg-icon" aria-hidden="true">${escapeHtml(leg.icon)}</span>
+                  <div>
+                    <strong>${escapeHtml(leg.title)}</strong>
+                    <span>${escapeHtml(leg.text)}</span>
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        `;
+
         const boxes = Object.entries(day.details).map(([title, items]) => `
           <div class="detail-box">
             <h4>${escapeHtml(title)}</h4>
-            <ul>${items.map((item) => `<li>${item}</li>`).join("")}</ul>
+            <ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+          </div>
+        `).join("");
+
+        const guide = (day.guide || []).map((section) => `
+          <div class="guide-section">
+            <h4>${escapeHtml(section.title)}</h4>
+            <p>${escapeHtml(section.text)}</p>
           </div>
         `).join("");
 
         return `
-          <article class="day-story" id="day-${day.day}">
-            <div class="day-media gallery-day-${day.day}">${gallery}</div>
+          <article class="day-story${isTravelDay ? " is-travel" : ""}" id="day-${day.day}">
+            ${isTravelDay ? travelCard : `<div class="day-media gallery-day-${day.day}">${gallery}</div>`}
             <div class="day-copy">
               <div class="day-kicker">
                 <span class="day-num">${day.day}</span>
@@ -1157,6 +1489,7 @@
               </div>
               <h3>${escapeHtml(day.title)}</h3>
               <p class="summary">${escapeHtml(day.summary)}</p>
+              ${guide ? `<div class="guide-sections">${guide}</div>` : ""}
               <div class="detail-grid">${boxes}</div>
             </div>
           </article>
@@ -1164,6 +1497,7 @@
       }).join("");
 
       days.forEach((day) => {
+        if (day.mode === "travel") return;
         const node = document.querySelector(`.gallery-day-${day.day}`);
         if (node && window.lightGallery) {
           lightGallery(node, {
